@@ -590,13 +590,14 @@ public class WebDateField<V extends Comparable<V>>
 
     @Override
     public void setRequired(boolean required) {
+        boolean isRequiredIndicatorVisible = required && isEditable();
         // Set requiredIndicatorVisible to a component
         // in order to show required indicator
-        component.setRequiredIndicatorVisible(required);
+        component.setRequiredIndicatorVisible(isRequiredIndicatorVisible);
         // Set requiredIndicatorVisible only to DateField
         // in order to show required message and apply error styles.
         // TimeField should not have an additional required indicator.
-        dateField.setRequiredIndicatorVisible(required);
+        dateField.setRequiredIndicatorVisible(isRequiredIndicatorVisible);
 
         setupComponentErrorProvider(required, dateField);
         setupComponentErrorProvider(required, timeField);
